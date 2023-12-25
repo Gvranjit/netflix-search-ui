@@ -35,6 +35,6 @@ jobs:
     
           # Runs a single command using the runners shell
         - name: Try to connect to ssh to my local 
-          run: cloudflared tunnel info 754ee274-8586-4f10-b2ae-4b9249125bde
+          run: ssh 192.168.1.47 'echo "hello there"'
     
         
