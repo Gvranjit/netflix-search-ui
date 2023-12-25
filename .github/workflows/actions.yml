@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Try to connect to ssh to my local 
-        run: ssh secrets.SSH_USERNAME@secrets.SSH_ADDRESS 'echo "it works"'
+        run: ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} 'echo "it works"'
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
