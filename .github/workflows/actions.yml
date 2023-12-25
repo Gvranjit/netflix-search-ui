@@ -29,12 +29,13 @@ jobs:
             cloudflare_tunnel_credential: ${{ secrets.CLOUDFLARE_TUNNEL_CREDENTIAL }}
             cloudflare_tunnel_configuration: ${{ secrets.CLOUDFLARE_TUNNEL_CONFIGURATION }}
             cloudflare_tunnel_id: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+            run: ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} 'echo "it works"'
+
         
       # # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - uses: actions/checkout@v3
+        # - uses: actions/checkout@v3
     
           # Runs a single command using the runners shell
-        - name: Try to connect to ssh to my local 
-          run: ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} 'echo "it works"'
+        # - name: Try to connect to ssh to my local 
     
         
