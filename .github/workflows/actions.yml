@@ -35,6 +35,6 @@ jobs:
     
           # Runs a single command using the runners shell
         - name: Try to connect to ssh to my local 
-          run: ssh 192.168.1.47 'echo "hello there"'
+          run: ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} 'echo "it works"'
     
         
