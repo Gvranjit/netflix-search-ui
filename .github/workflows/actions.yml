@@ -27,14 +27,20 @@ jobs:
       # # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - uses: actions/checkout@v3
         # Runs a single command using the runners shell
-        - name: Try to connect to ssh to my local 
+        - name: Compiling and building production code
+          run:
+            yarn install;
+            yarn build;
+        - name: Preparing prerequisites for deployment
           run:
             touch ./id_rsa;
             echo "${{secrets.SSH_PRIVATE_KEY}}" >> ./id_rsa;
             chmod 600 ./id_rsa;
+        - name: Linking the pm2 remote path
+            sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2" "/usr/local/bin/pm2"
+        - name: Connecting
             ssh -o StrictHostKeyChecking=accept-new -i ./id_rsa -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"; mkdir -p /home/gaurav/deployments; mkdir -p /home/gaurav/deployments/netflix-search-ui; exit;';
-            yarn install;
-            yarn build;
+ 
             scp -i ./id_rsa -P 2024 -rp ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}}:/home/gaurav/deployments/netflix-search-ui/;
             ssh -i ./id_rsa ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 '/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2 stop netflix-search-ui; /home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2 --name netflix-search-ui serve /home/gaurav/deployments/netflix-search-ui/index.html --spa ';
         
