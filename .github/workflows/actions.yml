@@ -29,14 +29,13 @@ jobs:
         # Runs a single command using the runners shell
         - name: Try to connect to ssh to my local 
           run:
-            
             touch ./id_rsa;
             echo "${{secrets.SSH_PRIVATE_KEY}}" >> ./id_rsa;
-            chmod 600 ./id_rsa
-            ssh -o StrictHostKeyChecking=accept-new -i ./id_rsa -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"'
-            ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'mkdir -p /home/deployments; mkdir -p /home/deployments/netflix-search-ui'
-            yarn install
-            yarn build
-            scp -P 2024 -rp ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}}:/home/deployments/netflix-search-ui/
-            ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'pm2 stop netflix-search-ui; pm2 --name netflix-search-ui serve /home/deployments/netflix-search-ui/index.html --spa '
+            chmod 600 ./id_rsa;
+            ssh -o StrictHostKeyChecking=accept-new -i ./id_rsa -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"';
+            ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'mkdir -p /home/deployments; mkdir -p /home/deployments/netflix-search-ui';
+            yarn install;
+            yarn build;
+            scp -P 2024 -rp ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}}:/home/deployments/netflix-search-ui/;
+            ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'pm2 stop netflix-search-ui; pm2 --name netflix-search-ui serve /home/deployments/netflix-search-ui/index.html --spa ';
         
