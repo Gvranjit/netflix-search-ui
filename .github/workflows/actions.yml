@@ -38,9 +38,8 @@ jobs:
             chmod 600 ./id_rsa;
         - name: Linking the node, pm2 , etc paths
           run:
-            # ssh -i ./id_rsa -o StrictHostKeyChecking=accept-new ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'sudo ln -S "/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2" "/usr/local/bin/pm2";exit; sudo ln -S "/home/gaurav/.nvm/versions/node/v18.17.1/bin/node" "/usr/bin/env";';
-            sudo ln -S "/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2" "/usr/local/bin/pm2";
-            sudo ln -S "/home/gaurav/.nvm/versions/node/v18.17.1/bin/node" "/usr/bin/env";
+            ssh -i ./id_rsa -o StrictHostKeyChecking=accept-new ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'ln -S "/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2" "/usr/local/bin/pm2";exit;ln -S "/home/gaurav/.nvm/versions/node/v18.17.1/bin/node" "/usr/bin/env";';
+          
         - name: Connecting
           run:
             ssh -i ./id_rsa -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"; mkdir -p /home/gaurav/deployments; mkdir -p /home/gaurav/deployments/netflix-search-ui; exit;';
