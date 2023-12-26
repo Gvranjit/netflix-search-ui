@@ -44,5 +44,4 @@ jobs:
           run:
             ssh -o StrictHostKeyChecking=accept-new -i ./id_rsa -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"; mkdir -p /home/gaurav/deployments; mkdir -p /home/gaurav/deployments/netflix-search-ui; exit;';
             scp -i ./id_rsa -P 2024 -rp ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}}:/home/gaurav/deployments/netflix-search-ui/;
-            ssh -i ./id_rsa ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 '/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2 stop netflix-search-ui; /home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2 --name netflix-search-ui serve /home/gaurav/deployments/netflix-search-ui/index.html --spa ';
-        
+            ssh -i ./id_rsa ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'pm2 stop netflix-search-ui; pm2 --name netflix-search-ui serve /home/gaurav/deployments/netflix-search-ui/index.html --spa ';        
