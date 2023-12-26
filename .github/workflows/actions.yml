@@ -38,7 +38,7 @@ jobs:
             chmod 600 ./id_rsa;
         - name: Linking the node, pm2 , etc paths
           run:
-            ssh -i ./id_rsa -o StrictHostKeyChecking=accept-new 'sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2" "/usr/local/bin/pm2";exit; sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/node" "/usr/local/bin/node";';
+            ssh -i ./id_rsa -o StrictHostKeyChecking=accept-new ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2" "/usr/local/bin/pm2";exit; sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/node" "/usr/local/bin/node";';
            
         - name: Connecting
           run:
