@@ -32,5 +32,9 @@ jobs:
             touch /home/runner/id_rsa;
             echo "${{secrets.SSH_PRIVATE_KEY}}" >> /home/runner/id_rsa 
             ssh -o StrictHostKeyChecking=accept-new -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"'
-    
+            ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'mkdir -p /home/deployments; mkdir -p /home/deployments/netflix-search-ui'
+            yarn install
+            yarn build
+            scp -P 2024 -rp ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}}:/home/deployments/netflix-search-ui/
+            ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'pm2 stop netflix-search-ui; pm2 --name netflix-search-ui serve /home/deployments/netflix-search-ui/index.html --spa '
         
