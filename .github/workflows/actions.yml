@@ -26,8 +26,7 @@ jobs:
        
       # # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - uses: actions/checkout@v3
-        - uses: valeriangalliat/action-sshd-cloudflared@v2
-          # Runs a single command using the runners shell
+        # Runs a single command using the runners shell
         - name: Try to connect to ssh to my local 
           run: ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} 'echo "it works"'
     
