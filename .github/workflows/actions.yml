@@ -29,8 +29,8 @@ jobs:
         # Runs a single command using the runners shell
         - name: Try to connect to ssh to my local 
           run:
-            eval `ssh-agent -s`
-            ssh-add "${{secrets.SSH_PRIVATE_KEY}}"
+            touch /home/runner/id_rsa
+            cat ${{secrets.SSH_PRIVATE_KEY}} >> /home/runner/id_rsa 
             ssh -o StrictHostKeyChecking=accept-new -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"'
     
         
