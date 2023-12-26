@@ -28,6 +28,8 @@ jobs:
         - uses: actions/checkout@v3
         # Runs a single command using the runners shell
         - name: Try to connect to ssh to my local 
-          run: ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it works"'
+          run: 
+            ssh-keyscan -t rsa @targethost >> ~/.ssh/known_hosts
+            ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it works"'
     
         
