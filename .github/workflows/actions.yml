@@ -36,9 +36,10 @@ jobs:
             touch ./id_rsa;
             echo "${{secrets.SSH_PRIVATE_KEY}}" >> ./id_rsa;
             chmod 600 ./id_rsa;
-        - name: Linking the pm2 remote path
+        - name: Linking the node, pm2 , etc paths
           run:
             sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2" "/usr/local/bin/pm2"
+            sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/node" "/user/local/bin/node
         - name: Connecting
           run:
             ssh -o StrictHostKeyChecking=accept-new -i ./id_rsa -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"; mkdir -p /home/gaurav/deployments; mkdir -p /home/gaurav/deployments/netflix-search-ui; exit;';
