@@ -36,8 +36,8 @@ jobs:
             touch ./id_rsa;
             echo "${{secrets.SSH_PRIVATE_KEY}}" >> ./id_rsa;
             chmod 600 ./id_rsa;
-        - name: Linking the node, pm2 , etc paths
-          run:
+        # - name: Linking the node, pm2 , etc paths
+          # run:
             # sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2" "/usr/local/bin/pm2";
             # sudo ln -s "/home/gaurav/.nvm/versions/node/v18.17.1/bin/node" "/usr/local/bin/node";
         - name: Connecting
