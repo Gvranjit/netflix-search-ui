@@ -29,6 +29,6 @@ jobs:
         # Runs a single command using the runners shell
         - name: Try to connect to ssh to my local 
           run: 
-            ssh -o StrictHostKeyChecking=accept-new ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it works"'
+            ssh -o StrictHostKeyChecking=accept-new ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"'
     
         
