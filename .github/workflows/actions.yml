@@ -47,4 +47,4 @@ jobs:
             scp -i ./id_rsa -P 2024 -rp ./deploy.sh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}}:/home/gaurav/deployments/netflix-search-ui/;
         - name: Final step - Deploying...Serving static page
           run:
-            ssh -i ./id_rsa ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 '/home/gaurav/deployments/netflix-search-ui/deploy.sh';        
+            ssh -i ./id_rsa ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'cd /home/gaurav/deployments/netflix-search-ui; chmod 600 ./deploy.sh';        
