@@ -1,1 +1,1 @@
-pm2 start
+/home/gaurav/.nvm/versions/node/v18.17.1/bin/pm2 start
