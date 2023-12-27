@@ -39,6 +39,6 @@ jobs:
 
         - name: Connecting
           run:
-            ssh -i ./id_rsa -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"; mkdir -p /home/gaurav/deployments; mkdir -p /home/gaurav/deployments/netflix-search-ui; exit;';
+            ssh -o StrictHostKeyChecking=accept-new -i ./id_rsa -vv ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 'echo "it workstgereat"; mkdir -p /home/gaurav/deployments; mkdir -p /home/gaurav/deployments/netflix-search-ui; exit;';
             scp -i ./id_rsa -P 2024 -rp ./dist ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}}:/home/gaurav/deployments/netflix-search-ui/;
             ssh -i ./id_rsa ${{secrets.SSH_USERNAME}}@${{secrets.SSH_ADDRESS}} -p 2024 './deploy.sh';        
