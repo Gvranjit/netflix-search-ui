@@ -32,9 +32,9 @@ const App = () => {
           />
         </Form>
         <br />
-        {results && (
+        {results && results.results && (
           <div>
-            <img src={results?.results[0].img} alt="" loading="lazy" />
+            <img src={results.results[0].img} alt="" loading="lazy" />
             {Object.values(results.results[0].countries).map(
               (country, index) => (
                 <h3 key={index}>{country}</h3>
